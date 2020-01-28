@@ -35,8 +35,30 @@ closeBtn.addEventListener('click', (event) =>
 let submitBtn = document.querySelector('.submit');
 let userField = document.querySelector('#user');
 let passField = document.querySelector('#pass');
-submitBtn.addEventListener ('click', (event) =>
+// submitBtn.addEventListener ('click', (event) =>
+// {
+//     userField.classList.add(`error`);
+//     passField.classList.add(`error`);
+// })
+// - Advanced: Once successful, try applying to both `input.field` using `querySelectorAll()` and a `forEach()` (or another type of traversal loop)
+const allInputField = document.querySelectorAll('.field')
+
+allInputField.forEach( input => {
+    submitBtn.addEventListener ('click', (event) => {
+        input.classList.add(`error`);
+    }) 
+});
+
+
+// 4. 
+
+userField.addEventListener ('focus', (event) =>
 {
-    userField.classList.add(`error`);
-    passField.classList.add(`error`);
+    userField.classList.remove(`error`);
 })
+passField.addEventListener ('focus', (event) =>
+{
+    passField.classList.remove(`error`);
+})
+//    - Advanced: Then do this by writing only ONE event listener/handler for all input elements and applying it using a traversal loop */
+
