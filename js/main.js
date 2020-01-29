@@ -37,16 +37,16 @@ closeBtn.addEventListener('click', (event) =>
 // - Advanced: Once successful, try applying to both `input.field` using `querySelectorAll()` and a `forEach()` (or another type of traversal loop)
 let submitBtn = document.querySelector('.submit');
 const allInputField = document.querySelectorAll('.field');
-allInputField.forEach( input => {
-    submitBtn.addEventListener ('click', (event) => {
-        input.classList.add(`error`);
-    })
-    // 4- Advanced: Then do this by writing only ONE event listener/handler for all input elements and applying it using a traversal loop */
-    input.addEventListener('focus', (event) =>
-    {
-        input.classList.remove(`error`);
-    })
-});
+// allInputField.forEach( input => {
+//     submitBtn.addEventListener ('click', (event) => {
+//         input.classList.add(`error`);
+//     })
+//     // 4- Advanced: Then do this by writing only ONE event listener/handler for all input elements and applying it using a traversal loop */
+//     input.addEventListener('focus', (event) =>
+//     {
+//         input.classList.remove(`error`);
+//     })
+// });
 
 // ************************************************************
 // 4. Remove the `.error` class from any individual `<input>` when the cursor gives it `focus`
@@ -80,13 +80,36 @@ allInputField.forEach( input => {
 
 submitBtn.setAttribute(`type`,`submit`);
 submitBtn.addEventListener ("click", (event) => 
-    {
-        event.preventDefault()
+    { 
+        event.preventDefault();
     });
+
 // 2. On submit, only add the `.error` class to the elements that have a `value` of "" (blank, meaning any text will prevent an error)
+
+// var userName = document.querySelector('#user').value;
+// var passWord = document.querySelector('#pass').value;
+// if ( userName == "" && userName == "") {
+//     alert ("try again");
+// }
+function inputValidation(input) {
+    var inp = input.value.trim();
+    if (inp == "") {
+    input.classList.add(`error`);
+  }
+
+}
+
+allInputField.forEach( input => {
+    submitBtn.addEventListener ('click', (event) => {
+        inputValidation(input);
+    })
+    input.addEventListener('focus', (event) =>
+    {
+        input.classList.remove(`error`);
+    })
+});
+
 //    - What happens if the user just adding spaces to the field? Find a function that will trim off the white spaces in a field to validate it.
-
-
 
 
 // 3. Prototype a validation by checking the two fields on `submit`. If both are "valid" (not blank), close the `#modal`, remove the `#signin` and append `textContent` to the `#hello` heading so it reads "Welcome, [USERNAME]", in a font that's half the current size
