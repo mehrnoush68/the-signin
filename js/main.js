@@ -83,13 +83,13 @@ submitBtn.addEventListener ("click", (event) =>
     {
         event.preventDefault();
         });
-
+// ************************************************************
 // 2. On submit, only add the `.error` class to the elements that have a `value` of "" (blank, meaning any text will prevent an error)
 //    - What happens if the user just adding spaces to the field? Find a function that will trim off the white spaces in a field to validate it.
 
 function inputValidation(input) {
     var inp = input.value.trim();
-    if (inp == "") {
+    if (inp == "" ) {
     input.classList.add(`error`);   
     } 
 }
@@ -102,9 +102,16 @@ allInputField.forEach( input => {
     {
         input.classList.remove(`error`);
     })
+// part2 -step4-%%%%
+    if (input.value == "" ){
+        input.addEventListener ('blur', (event) => {
+             
+                input.classList.add(`error`);   
+        })
+        }
 });
 
-
+// ************************************************************
 // 3. Prototype a validation by checking the two fields on `submit`. If both are "valid" (not blank), close the `#modal`, remove the `#signin` and append `textContent` to the `#hello` heading so it reads "Welcome, [USERNAME]", in a font that's half the current size
 //    - Consider the various ways we could validate both fields, including the use of a boolean `var` as a switch
 
@@ -121,13 +128,28 @@ submitBtn.addEventListener ("click", (event) =>
             welcomeUser.style.display = `none`;
         }
     });
-   
+
+// ************************************************************
 // 4. Try validating a field by adding/removing `.error` immediately after the cursor leaves one of the individual `<input>` (rather than on submit)
 //    - Consider this can be added individually to elements, but do so by writing one event listener/callback function using a loop
 
+// let userField = document.querySelector('#user');
+// let passField = document.querySelector('#pass');
+// passField.addEventListener ('blur', (event) => {
+//     if (passField.value == "" ) {
+//         passField.classList.add(`error`);   
+//         }
+// })
+// userField.addEventListener ('blur', (event) => {
+//     if (userField.value == "" ) {
+//         userField.classList.add(`error`);   
+//         }
+// })
 
 
+// part2 -step4-%%%% added to step2
 
+// ************************************************************
 // 5. Allow the user to click the `#modal` to close itself
 //    - Consider what happens when two elements that are overlapping are both waiting for a click: Click events will "bubble" (propagate) up the DOM tree. How could we stop an event from triggering on it's parents?
 //    - This will likely require a bit of web searching to solve
