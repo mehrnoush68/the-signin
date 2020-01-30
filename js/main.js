@@ -78,8 +78,8 @@ const allInputField = document.querySelectorAll('.field');
 
 // 1. Modify the `#submit` element from `type="button"` to `type="submit"`. When the user triggers a `submit`, event, _prevent_ the form from proceeding with it's _default_ behavior.
 
-submitBtn.setAttribute(`type`,`submit`);
-submitBtn.addEventListener ("click", (event) => 
+
+submitBtn.addEventListener ("submit", (event) => 
     {
         event.preventDefault();
         });
