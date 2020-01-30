@@ -80,23 +80,18 @@ const allInputField = document.querySelectorAll('.field');
 
 submitBtn.setAttribute(`type`,`submit`);
 submitBtn.addEventListener ("click", (event) => 
-    { 
+    {
         event.preventDefault();
-    });
+        });
 
 // 2. On submit, only add the `.error` class to the elements that have a `value` of "" (blank, meaning any text will prevent an error)
+//    - What happens if the user just adding spaces to the field? Find a function that will trim off the white spaces in a field to validate it.
 
-// var userName = document.querySelector('#user').value;
-// var passWord = document.querySelector('#pass').value;
-// if ( userName == "" && userName == "") {
-//     alert ("try again");
-// }
 function inputValidation(input) {
     var inp = input.value.trim();
     if (inp == "") {
-    input.classList.add(`error`);
-  }
-
+    input.classList.add(`error`);   
+    } 
 }
 
 allInputField.forEach( input => {
@@ -109,14 +104,24 @@ allInputField.forEach( input => {
     })
 });
 
-//    - What happens if the user just adding spaces to the field? Find a function that will trim off the white spaces in a field to validate it.
-
 
 // 3. Prototype a validation by checking the two fields on `submit`. If both are "valid" (not blank), close the `#modal`, remove the `#signin` and append `textContent` to the `#hello` heading so it reads "Welcome, [USERNAME]", in a font that's half the current size
 //    - Consider the various ways we could validate both fields, including the use of a boolean `var` as a switch
 
 
-
+submitBtn.addEventListener ("click", (event) => 
+    {
+        var userName = document.querySelector('#user').value;
+        var password = document.querySelector('#pass').value;
+        if(password !== "" && userName !== "" ){
+            modal.style.display = `none`;
+            let welcomeUser = document.querySelector('.signin');
+            let helloUser = document.querySelector('.hello');
+            helloUser.innerHTML = `Welcome, ${userName}!`;
+            welcomeUser.style.display = `none`;
+        }
+    });
+   
 // 4. Try validating a field by adding/removing `.error` immediately after the cursor leaves one of the individual `<input>` (rather than on submit)
 //    - Consider this can be added individually to elements, but do so by writing one event listener/callback function using a loop
 
