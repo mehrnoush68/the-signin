@@ -4,21 +4,21 @@
 
 
 // 1. "Listen" for when the user `click`s the `#signin` button, `display` the `#modal` window
-let signinBtnClicked = document.querySelector('.signin'); 
-let displaySignin = document.querySelectorAll('.modal');
+// let signinBtnClicked = document.querySelector('.signin'); 
+// let displaySignin = document.querySelectorAll('.modal');
 
-signinBtnClicked.addEventListener('click', (event) =>
-{
-    modal.style.display = `block`;
-})
+// signinBtnClicked.addEventListener('click', (event) =>
+// {
+//     modal.style.display = `block`;
+// })
 
 // ************************************************************
 // 2. "Listen" for when the user `click`s the `#close` button, `display` (or fade out) out the `#modal` window
-let closeBtn = document.querySelector('.close');
-closeBtn.addEventListener('click', (event) =>
-{
-    modal.style.display = `none`;
-})
+// let closeBtn = document.querySelector('.close');
+// closeBtn.addEventListener('click', (event) =>
+// {
+//     modal.style.display = `none`;
+// })
 
 // ************************************************************
 // 3. "Listen" for when the user `click`s the `#submit` button, add an `.error` class to both `input.field` elements
@@ -35,8 +35,8 @@ closeBtn.addEventListener('click', (event) =>
 // })
 
 // - Advanced: Once successful, try applying to both `input.field` using `querySelectorAll()` and a `forEach()` (or another type of traversal loop)
-let submitBtn = document.querySelector('.submit');
-const allInputField = document.querySelectorAll('.field');
+// let submitBtn = document.querySelector('.submit');
+// const allInputField = document.querySelectorAll('.field');
 // allInputField.forEach( input => {
 //     submitBtn.addEventListener ('click', (event) => {
 //         input.classList.add(`error`);
@@ -79,55 +79,55 @@ const allInputField = document.querySelectorAll('.field');
 // 1. Modify the `#submit` element from `type="button"` to `type="submit"`. When the user triggers a `submit`, event, _prevent_ the form from proceeding with it's _default_ behavior.
 
 
-submitBtn.addEventListener ("submit", (event) => 
-    {
-        event.preventDefault();
-        });
+// submitBtn.addEventListener ("submit", (event) => 
+//     {
+//         event.preventDefault();
+//         });
 // ************************************************************
 // 2. On submit, only add the `.error` class to the elements that have a `value` of "" (blank, meaning any text will prevent an error)
 //    - What happens if the user just adding spaces to the field? Find a function that will trim off the white spaces in a field to validate it.
 
-function inputValidation(input) {
-    var inp = input.value.trim();
-    if (inp == "" ) {
-    input.classList.add(`error`);   
-    } 
-}
+// function inputValidation(input) {
+//     var inp = input.value.trim();
+//     if (inp == "" ) {
+//     input.classList.add(`error`);   
+//     } 
+// }
 
-allInputField.forEach( input => {
-    submitBtn.addEventListener ('click', (event) => {
-        inputValidation(input);
-    })
-    input.addEventListener('focus', (event) =>
-    {
-        input.classList.remove(`error`);
-    })
-// part2 -step4-%%%%
-    if (input.value == "" ){
-        input.addEventListener ('blur', (event) => {
+// allInputField.forEach( input => {
+//     submitBtn.addEventListener ('click', (event) => {
+//         inputValidation(input);
+//     })
+//     input.addEventListener('focus', (event) =>
+//     {
+//         input.classList.remove(`error`);
+//     })
+// // part2 -step4-%%%%
+//     if (input.value == "" ){
+//         input.addEventListener ('blur', (event) => {
              
-                input.classList.add(`error`);   
-        })
-        }
-});
+//                 input.classList.add(`error`);   
+//         })
+//         }
+// });
 
 // ************************************************************
 // 3. Prototype a validation by checking the two fields on `submit`. If both are "valid" (not blank), close the `#modal`, remove the `#signin` and append `textContent` to the `#hello` heading so it reads "Welcome, [USERNAME]", in a font that's half the current size
 //    - Consider the various ways we could validate both fields, including the use of a boolean `var` as a switch
 
 
-submitBtn.addEventListener ("click", (event) => 
-    {
-        var userName = document.querySelector('#user').value;
-        var password = document.querySelector('#pass').value;
-        if(password !== "" && userName !== "" ){
-            modal.style.display = `none`;
-            let welcomeUser = document.querySelector('.signin');
-            let helloUser = document.querySelector('.hello');
-            helloUser.innerHTML = `Welcome, ${userName}!`;
-            welcomeUser.style.display = `none`;
-        }
-    });
+// submitBtn.addEventListener ("click", (event) => 
+//     {
+//         var userName = document.querySelector('#user').value;
+//         var password = document.querySelector('#pass').value;
+//         if(password !== "" && userName !== "" ){
+//             modal.style.display = `none`;
+//             let welcomeUser = document.querySelector('.signin');
+//             let helloUser = document.querySelector('.hello');
+//             helloUser.innerHTML = `Welcome, ${userName}!`;
+//             welcomeUser.style.display = `none`;
+//         }
+//     });
 
 // ************************************************************
 // 4. Try validating a field by adding/removing `.error` immediately after the cursor leaves one of the individual `<input>` (rather than on submit)
@@ -153,3 +153,48 @@ submitBtn.addEventListener ("click", (event) =>
 // 5. Allow the user to click the `#modal` to close itself
 //    - Consider what happens when two elements that are overlapping are both waiting for a click: Click events will "bubble" (propagate) up the DOM tree. How could we stop an event from triggering on it's parents?
 //    - This will likely require a bit of web searching to solve
+
+
+let signinBtnClicked = document.querySelector('.signin'); 
+let displaySignin = document.querySelectorAll('.modal');
+let closeBtn = document.querySelector('.close');
+let submitBtn = document.querySelector('.submit');
+let user = document.querySelector('#user');
+let pass = document.querySelector('#pass');
+let helloUser = document.querySelector('.hello');
+const allInputField = document.querySelectorAll('.field');
+
+// let $form = document.querySelector('.getstarted')
+
+signinBtnClicked.addEventListener('click', (event) => {modal.style.display = `block`;})
+closeBtn.addEventListener('click', (event) => {modal.style.display = `none`;})
+submitBtn.addEventListener ("submit", (event) => {event.preventDefault();});
+
+function inputValidation(input) {
+    var inp = input.value.trim();
+    if (inp == "" ) {
+        input.classList.add(`error`);
+        return false;  
+    } 
+    else {return true;}
+}
+        
+allInputField.forEach( input => {
+    input.addEventListener('focus', (event) =>{input.classList.remove(`error`);})
+    input.addEventListener ('blur', (event) => {
+        if (input.value == "" ) {
+            input.classList.add(`error`); 
+        }
+    })
+    
+});
+submitBtn.addEventListener ("click", (event) => 
+{
+    let p = inputValidation(pass);
+    let u = inputValidation(user);
+    if(p && u){
+        modal.style.display = `none`;
+        helloUser.innerHTML = `Welcome, ${user.value}!`;
+        signinBtnClicked.style.display = `none`;
+    }
+});
