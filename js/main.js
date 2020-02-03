@@ -153,6 +153,13 @@
 // 5. Allow the user to click the `#modal` to close itself
 //    - Consider what happens when two elements that are overlapping are both waiting for a click: Click events will "bubble" (propagate) up the DOM tree. How could we stop an event from triggering on it's parents?
 //    - This will likely require a bit of web searching to solve
+// body.addEventListener("click", function() {
+//     modal.style.display = `none`;
+// },true);
+
+// modalForm.addEventListener("click", function() {
+// modal.style.display = `block`;
+// },true);
 
 
 let signinBtnClicked = document.querySelector('.signin'); 
@@ -162,16 +169,13 @@ let submitBtn = document.querySelector('.submit');
 let user = document.querySelector('#user');
 let pass = document.querySelector('#pass');
 let helloUser = document.querySelector('.hello');
-const allInputField = document.querySelectorAll('.field');
 let modalForm = document.querySelector('.getstarted');
 let body = document.querySelector('#body');
+const allInputField = document.querySelectorAll('.field');
 
 signinBtnClicked.addEventListener('click', (event) => {modal.style.display = `block`;})
 closeBtn.addEventListener('click', (event) => {modal.style.display = `none`;})
-submitBtn.addEventListener ("submit", (event) => {
-    event.preventDefault();
-
-});
+submitBtn.addEventListener ("submit", (event) => {event.preventDefault();});
 
 function inputValidation(input) {
     var inp = input.value.trim();
