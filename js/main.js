@@ -163,12 +163,15 @@ let user = document.querySelector('#user');
 let pass = document.querySelector('#pass');
 let helloUser = document.querySelector('.hello');
 const allInputField = document.querySelectorAll('.field');
-
-// let $form = document.querySelector('.getstarted')
+let modalForm = document.querySelector('.getstarted');
+let body = document.querySelector('#body');
 
 signinBtnClicked.addEventListener('click', (event) => {modal.style.display = `block`;})
 closeBtn.addEventListener('click', (event) => {modal.style.display = `none`;})
-submitBtn.addEventListener ("submit", (event) => {event.preventDefault();});
+submitBtn.addEventListener ("submit", (event) => {
+    event.preventDefault();
+
+});
 
 function inputValidation(input) {
     var inp = input.value.trim();
@@ -181,12 +184,7 @@ function inputValidation(input) {
         
 allInputField.forEach( input => {
     input.addEventListener('focus', (event) =>{input.classList.remove(`error`);})
-    input.addEventListener ('blur', (event) => {
-        if (input.value == "" ) {
-            input.classList.add(`error`); 
-        }
-    })
-    
+    input.addEventListener ('blur', (event) => {if (input.value == "" ) { input.classList.add(`error`); }})
 });
 submitBtn.addEventListener ("click", (event) => 
 {
@@ -198,3 +196,12 @@ submitBtn.addEventListener ("click", (event) =>
         signinBtnClicked.style.display = `none`;
     }
 });
+
+body.addEventListener("click", function() {
+        modal.style.display = `none`;
+},true);
+
+modalForm.addEventListener("click", function() {
+    modal.style.display = `block`;
+},true);
+
